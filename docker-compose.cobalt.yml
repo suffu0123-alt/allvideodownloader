@@ -1,0 +1,15 @@
+services:
+  cobalt:
+    image: ghcr.io/imputnet/cobalt:11
+    container_name: allvideodownloader-cobalt
+    init: true
+    read_only: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${COBALT_PORT:-9000}:9000/tcp"
+    environment:
+      # Use the externally reachable HTTPS URL when placing Cobalt behind a reverse proxy.
+      # For local development, the default below is sufficient.
+      API_URL: "${COBALT_PUBLIC_URL:-http://localhost:9000/}"
+    security_opt:
+      - no-new-privileges:true

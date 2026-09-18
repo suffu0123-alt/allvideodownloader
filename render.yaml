@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: allvideodownloader
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: COBALT_API_URL
+        sync: false
+      - key: COBALT_API_KEY
+        sync: false
+      - key: SHORTCUT_API_KEY
+        sync: false
+      - key: SHORTCUT_AUTH_MODE
+        value: optional
+      - key: APP_BASE_URL
+        sync: false
+      - key: YTDLP_PATH
+        value: /usr/bin/yt-dlp
+      - key: FFMPEG_PATH
+        value: /usr/bin/ffmpeg
